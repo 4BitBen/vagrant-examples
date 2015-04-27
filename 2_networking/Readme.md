@@ -1,8 +1,8 @@
 # Key Concepts
 
-## [Networking](http://docs.vagrantup.com/v2/cli/index.html)
+## [Networking](http://docs.vagrantup.com/v2/networking/index.html)
 * Configure the IP of the VM
-* Configure the Network Adapters of the VM - NAT, Host-Only, Bridged
+* Configure the Network Adapters of the VM - NAT, Host-Only, Bridged, Port Forwarding
 
 # Create the VM
 

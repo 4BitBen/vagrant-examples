@@ -30,13 +30,11 @@ The purpose of this is to get someone new to Vagrant familiar with Vagrant conce
         $ git clone <url>
         
 # Examples
-[Simple](1_simple) - Initial VM creation
-
-[Network](2_networking) - Setup VM Networking
+1. Simple - Initial VM creation
+2. Networking - Configure VM Network Adapters
+3. Synced Folders - Sync a folder from the Host machine to the Guest VM
 
 //TODO:
-
-Synced Folders
 
 Provisioners
 

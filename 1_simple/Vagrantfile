@@ -2,6 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  # See https://atlas.hashicorp.com/boxcutter/boxes/centos71
+  # See https://atlas.hashicorp.com/boxcutter/centos71
   config.vm.box = "boxcutter/centos71"
 end

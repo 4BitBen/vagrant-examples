@@ -1,0 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "boxcutter/centos71"
+  config.vm.synced_folder "..", "/vagrant-examples-default"
+  #config.vm.synced_folder "..", "/vagrant-examples-smb",   type: "smb"
+  #config.vm.synced_folder "..", "/vagrant-examples-rsync", type: "rsync"
+  #config.vm.synced_folder "..", "/vagrant-examples-nfs",   type: "nfs"
+end
