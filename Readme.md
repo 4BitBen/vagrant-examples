@@ -13,6 +13,7 @@ The purpose of this is to get someone new to Vagrant familiar with Vagrant conce
         $ export VAGRANT_DEFAULT_PROVIDER=parallels
         
     Or add it to your ~/.bashrc
+    
 3. (Optional) Add the main box we will be using. This will speed up creating the initial VM.
 
         $ vagrant box add boxcutter/centos71
