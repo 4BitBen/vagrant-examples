@@ -33,10 +33,9 @@ The purpose of this is to get someone new to Vagrant familiar with Vagrant conce
 1. Simple - Initial VM creation
 2. Networking - Configure VM Network Adapters
 3. Synced Folders - Sync a folder from the Host machine to the Guest VM
+4. Provisioners - Provision a VM using a combination of shell scripts, ansible, puppet, chef, or salt
 
 //TODO:
-
-Provisioners
 
 Multi-Machine
 
