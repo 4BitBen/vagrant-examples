@@ -18,3 +18,4 @@
     # Look at the new vagrant folder
     [guestOS]$ ls /vagrant-examples-default
     # Try to configure Vagrant to use the other sync options
+    # Go into the /vagrant-* folders on the guest OS and try creating a file. See if it appears in the host OS as well as in any of the other synced folders.
