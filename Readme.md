@@ -45,3 +45,5 @@ Bring it all together.
 * [Vagrant Cloud](https://vagrantcloud.com/) - Find pre-built Vagrant boxes
 * [Comparing Filesystem Performance in VMs](http://mitchellh.com/comparing-filesystem-performance-in-virtual-machines) - Further look at sync folders
 * [Packer](https://packer.io/) - Build Vagrant Boxes from ISO
+* [IBM Research: Comparison of VM and LXC](http://domino.research.ibm.com/library/cyberdig.nsf/papers/0929052195DD819C85257D2300681E7B/$File/rc25482.pdf) - Comparison of Virtual Machines and Linux Containers
+* [Wild West of Unix I/O](https://www.youtube.com/watch?v=Ss4pUbq09Lw) (video) - Talk from FOSDEM on how VMs affect CPU and I/O
