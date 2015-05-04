@@ -26,7 +26,7 @@
 # Play Around
 
     # Look at the default network settings
-    [guestOS]$ ifconfig
+    [guestOS]$ ip addr show
     # Look at the contents of /vagrant
     [guestOS]$ ls /vagrant
     # Get Familiar with vagrant defaults
@@ -37,3 +37,21 @@
     [guestOS]$ su -
     # 3. vagrant has password-less sudo
     [guestOS]$ sudo whoami
+    
+# VM Lifecycle
+
+**Startup**
+
+    $ vagrant up
+    
+**Suspend**
+
+    $ vagrant suspend
+    
+**Shutdown**
+
+    $ vagrant halt
+    
+**Destroy**
+
+    $ vagrant destroy

@@ -1,0 +1,10 @@
+[Unit]
+Requires=network-online.target
+
+[Service]
+ExecStart=/usr/bin/npm start
+WorkingDirectory=/home/vagrant
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

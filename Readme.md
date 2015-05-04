@@ -1,6 +1,14 @@
 # Purpose
 The purpose of this is to get someone new to Vagrant familiar with Vagrant concepts through a few simple examples.
 
+# Vagrant Use Cases
+
+## Developer sandbox
+Allow a developer to install new software and play around without impacting their dev environment.
+
+## Network sandbox
+Create multiple machines and have them talk to each other, sever network connections, bring machines up/down.
+
 # Pre-Requisite
 1. Download/Install [Vagrant](http://www.vagrantup.com/downloads.html)
 2. Download/Install a VM Provider - e.g. [Virtualbox](https://www.virtualbox.org/wiki/Downloads) for Windows or [Parallels](http://www.parallels.com/products/desktop/download/) for Mac
@@ -35,10 +43,6 @@ The purpose of this is to get someone new to Vagrant familiar with Vagrant conce
 3. Synced Folders - Sync a folder from the Host machine to the Guest VM
 4. Provisioners - Provision a VM using a combination of shell scripts, ansible, puppet, chef, or salt
 5. Multi-Machine - Control multiple machines with a single Vagrantfile
-
-//TODO:
-
-Bring it all together.
 
 # Further Reading
 * [Vagrant Documentation](http://docs.vagrantup.com/v2/) - Read more about Vagrant

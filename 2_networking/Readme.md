@@ -15,6 +15,6 @@
 # Play Around
 
     # Look at the network settings (compare to networks settings in 1_simple)
-    [guestOS]$ ifconfig
+    [guestOS]$ ip addr show
     # Look at the hostname
     [guestOS]$ hostname
