@@ -38,11 +38,12 @@ Create multiple machines and have them talk to each other, sever network connect
         $ git clone <url>
         
 # Examples
-1. Simple - Initial VM creation
+1. Simple - Initial VM creation, lifecycle of a VM
 2. Networking - Configure VM Network Adapters
 3. Synced Folders - Sync a folder from the Host machine to the Guest VM
 4. Provisioners - Provision a VM using a combination of shell scripts, ansible, puppet, chef, or salt
 5. Multi-Machine - Control multiple machines with a single Vagrantfile
+6. Example - Example that creates a client machine, a load balancing web server machine, and three machines with the same service
 
 # Further Reading
 * [Vagrant Documentation](http://docs.vagrantup.com/v2/) - Read more about Vagrant
