@@ -9,12 +9,12 @@
     
 You will start to see responses from the different servers:
 
-    pong 192.168.50.51
-    pong 192.168.50.52
-    pong 192.168.50.53
-    pong 192.168.50.51
-    pong 192.168.50.52
-    pong 192.168.50.53
+    pong 192.168.50.61
+    pong 192.168.50.62
+    pong 192.168.50.63
+    pong 192.168.50.61
+    pong 192.168.50.62
+    pong 192.168.50.63
     
 # Play Around
 

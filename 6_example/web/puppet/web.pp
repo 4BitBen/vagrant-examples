@@ -37,9 +37,9 @@ http {
     #gzip  on;
 
     upstream ping {
-        server 192.168.50.51:3000;
-        server 192.168.50.52:3000;
-        server 192.168.50.53:3000;
+        server 192.168.50.61:3000;
+        server 192.168.50.62:3000;
+        server 192.168.50.63:3000;
     }
 
     server {
