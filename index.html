@@ -55,7 +55,45 @@
 <h2>
 <a id="still-interested-lets-get-started" class="anchor" href="#still-interested-lets-get-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Still Interested? Let's Get Started</h2>
 
-<p>Click on the Download link above and begin going through the Readme.</p>
+<p>Click on the Download link above to get some vagrant examples.</p>
+
+<h3>
+<a id="pre-requisite" class="anchor" href="#pre-requisite" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Requisite</h3>
+
+<p>Before creating the first VM, some initial setup needs to be done.</p>
+
+<ol>
+<li>Download/Install <a href="http://www.vagrantup.com/downloads.html">Vagrant</a>
+</li>
+<li>
+<p>Download/Install a VM Provider - e.g. <a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox</a> for Windows or <a href="http://www.parallels.com/products/desktop/download/">Parallels</a> for Mac</p>
+
+<p>a. <strong>(Parallels-Only)</strong> Install the parallels plugin</p>
+
+<pre><code>vagrant plugin install vagrant-parallels   
+</code></pre>
+
+<p>b. <strong>(Parallels-Only)</strong> Setting parallels as the default provider</p>
+
+<pre><code>export VAGRANT_DEFAULT_PROVIDER=parallels
+</code></pre>
+
+<p>Or add it to your ~/.bashrc</p>
+</li>
+<li>
+<p>(Optional) Add the main box we will be using. This will speed up creating the initial VM.</p>
+
+<pre><code>$ vagrant box add boxcutter/centos71
+NOTE: This will prompt you for the VM provider you are using. Enter the number based off what you installed in step #2 above.
+
+1) parallels
+2) virtualbox
+3) vmware_desktop
+
+Enter your choice: 
+</code></pre>
+</li>
+</ol>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/4BitBen/vagrant-examples">Vagrant Examples</a> is maintained by <a href="https://github.com/4BitBen">4BitBen</a>.</span>
