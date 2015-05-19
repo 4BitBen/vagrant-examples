@@ -169,7 +169,7 @@ end
 
 <p>Downloaded boxes are stored in </p>
 
-<pre><code>$HOME/.vagrant.d/boxes/\&lt;box_name\&gt;/\&lt;version\&gt;/\&lt;provider\&gt;. 
+<pre><code>$HOME/.vagrant.d/boxes/&lt;box_name&gt;/&lt;version&gt;/&lt;provider&gt;. 
 </code></pre>
 
 <p>If you look, it is an extremely small wrapper around how the Provider stores the Virtual Machine.</p>
@@ -209,7 +209,6 @@ end
     default: Removing insecure key from the guest if its present...
     default: Key inserted! Disconnecting and reconnecting using new SSH key...
 ==&gt; default: Machine booted and ready!
-==&gt; default: Checking for guest additions in VM...
 </code></pre>
 
 <h4>
@@ -223,7 +222,7 @@ end
 <p>Vagrant requires from default settings in order for it to interact with the VM. Here are a few requirements:</p>
 
 <ul>
-<li>vagrant/vagrant username/password</li>
+<li>vagrant username with a password of vagrant</li>
 <li>vagrant user is configured for password-less sudo</li>
 </ul>
 
