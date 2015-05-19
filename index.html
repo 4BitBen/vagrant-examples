@@ -148,18 +148,13 @@ vagrant up
 
 <p>The first thing that Vagrant needs is a Vagrantfile. A Vagrantfile is the main configuration item defining how to create the Virtual Machine - e.g. network settings, # of CPUs, Memory, etc. Vagrant looks in the current working directory for a Vagrantfile. Here is what our Vagrantfile looks like</p>
 
-<p>''''</p>
+<pre><code># -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-<h1>
-<a id="---mode-ruby---" class="anchor" href="#---mode-ruby---" aria-hidden="true"><span class="octicon octicon-link"></span></a>-<em>- mode: ruby -</em>-</h1>
-
-<h1>
-<a id="vi-set-ftruby-" class="anchor" href="#vi-set-ftruby-" aria-hidden="true"><span class="octicon octicon-link"></span></a>vi: set ft=ruby :</h1>
-
-<p>Vagrant.configure(2) do |config|
+Vagrant.configure(2) do |config|
   config.vm.box = "boxcutter/centos71"
 end
-''''</p>
+</code></pre>
 
 <p>The only thing our Vagrantfile defines is the Box. Every Vagrantfile must define at least a Box.</p>
 
@@ -200,8 +195,7 @@ end
 
 <p>Once the VM has been created and configured, it now gets provisioned - e.g. setting IP address(es), hostname, etc.</p>
 
-<p>''''
-==&gt; default: Booting VM...
+<pre><code>==&gt; default: Booting VM...
 ==&gt; default: Waiting for machine to boot. This may take a few minutes...
     default: SSH address: 127.0.0.1:2201
     default: SSH username: vagrant
@@ -216,7 +210,7 @@ end
     default: Key inserted! Disconnecting and reconnecting using new SSH key...
 ==&gt; default: Machine booted and ready!
 ==&gt; default: Checking for guest additions in VM...
-''''</p>
+</code></pre>
 
 <h4>
 <a id="playing-around" class="anchor" href="#playing-around" aria-hidden="true"><span class="octicon octicon-link"></span></a>Playing around</h4>
