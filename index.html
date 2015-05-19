@@ -55,8 +55,6 @@
 <h2>
 <a id="still-interested-lets-get-started" class="anchor" href="#still-interested-lets-get-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Still Interested? Let's Get Started</h2>
 
-<p>Click on the Download link above to get some vagrant examples.</p>
-
 <h3>
 <a id="pre-requisite" class="anchor" href="#pre-requisite" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Requisite</h3>
 
@@ -94,6 +92,175 @@ Enter your choice:
 </code></pre>
 </li>
 </ol>
+
+<h3>
+<a id="get-started" class="anchor" href="#get-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get Started</h3>
+
+<p>Click on the Download link above to get some vagrant examples, and extract the contents into a folder. All examples below assume you are in the folder that has the LICENSE file.</p>
+
+<h3>
+<a id="example-1-simple-vm" class="anchor" href="#example-1-simple-vm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 1: Simple VM</h3>
+
+<p>Let's create a Virtual Machine.</p>
+
+<pre><code>cd 1_simple
+vagrant up
+</code></pre>
+
+<p>Vagrant will output some information</p>
+
+<pre><code>==&gt; default: Importing base box 'boxcutter/centos71'...
+==&gt; default: Matching MAC address for NAT networking...
+==&gt; default: Checking if box 'boxcutter/centos71' is up to date...
+==&gt; default: Setting the name of the VM: 1_simple_default_1432041878529_74810
+==&gt; default: Fixed port collision for 22 =&gt; 2222. Now on port 2201.
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==&gt; default: Forwarding ports...
+    default: 22 =&gt; 2201 (adapter 1)
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2201
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Connection timeout. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if its present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+==&gt; default: Mounting shared folders...
+    default: /vagrant =&gt; C:/temp/4BitBen-vagrant-examples-533ed11/1_simple
+</code></pre>
+
+<p>And now you have your first VM created. Your VM provider knows about this VM as well. Bring up the VM provider's GUI and look at the newly created VM.</p>
+
+<p>Let's break down how Vagrant created the VM. </p>
+
+<h4>
+<a id="vagrantfile" class="anchor" href="#vagrantfile" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://docs.vagrantup.com/v2/vagrantfile/index.html">Vagrantfile</a>
+</h4>
+
+<p>The first thing that Vagrant needs is a Vagrantfile. A Vagrantfile is the main configuration item defining how to create the Virtual Machine - e.g. network settings, # of CPUs, Memory, etc. Vagrant looks in the current working directory for a Vagrantfile. Here is what our Vagrantfile looks like</p>
+
+<p>''''</p>
+
+<h1>
+<a id="---mode-ruby---" class="anchor" href="#---mode-ruby---" aria-hidden="true"><span class="octicon octicon-link"></span></a>-<em>- mode: ruby -</em>-</h1>
+
+<h1>
+<a id="vi-set-ftruby-" class="anchor" href="#vi-set-ftruby-" aria-hidden="true"><span class="octicon octicon-link"></span></a>vi: set ft=ruby :</h1>
+
+<p>Vagrant.configure(2) do |config|
+  config.vm.box = "boxcutter/centos71"
+end
+''''</p>
+
+<p>The only thing our Vagrantfile defines is the Box. Every Vagrantfile must define at least a Box.</p>
+
+<h4>
+<a id="box" class="anchor" href="#box" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://docs.vagrantup.com/v2/boxes.html">Box</a>
+</h4>
+
+<p>Once Vagrant has found the Vagrantfile and reads it, it will try to download the Box. A box is a base image. Vagrant essentially uses the base image to quickly clone a virtual machine. By default, Vagrant looks locally to see if this box has already been downloaded. If not, Vagrant looks in <a href="https://www.vagrantcloud.com">Vagrant Cloud</a> for the box and then downloads.</p>
+
+<pre><code>==&gt; default: Importing base box 'boxcutter/centos71'...
+</code></pre>
+
+<p>Downloaded boxes are stored in </p>
+
+<pre><code>$HOME/.vagrant.d/boxes/\&lt;box_name\&gt;/\&lt;version\&gt;/\&lt;provider\&gt;. 
+</code></pre>
+
+<p>If you look, it is an extremely small wrapper around how the Provider stores the Virtual Machine.</p>
+
+<h3>
+<a id="create-and-configure-vm" class="anchor" href="#create-and-configure-vm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create and Configure VM</h3>
+
+<p>Once the box has been imported, the VM gets created and configured - e.g. network adapters are created and configured for the VM.</p>
+
+<pre><code>==&gt; default: Setting the name of the VM: 1_simple_default_1432041878529_74810
+==&gt; default: Fixed port collision for 22 =&gt; 2222. Now on port 2201.
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==&gt; default: Forwarding ports...
+    default: 22 =&gt; 2201 (adapter 1)
+</code></pre>
+
+<p>Here the VM is using Network Address Translation for its networking. It is also configuring the VM Provider to do Port Forwarding.</p>
+
+<h4>
+<a id="provision-vm" class="anchor" href="#provision-vm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Provision VM</h4>
+
+<p>Once the VM has been created and configured, it now gets provisioned - e.g. setting IP address(es), hostname, etc.</p>
+
+<p>''''
+==&gt; default: Booting VM...
+==&gt; default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2201
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Connection timeout. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if its present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==&gt; default: Machine booted and ready!
+==&gt; default: Checking for guest additions in VM...
+''''</p>
+
+<h4>
+<a id="playing-around" class="anchor" href="#playing-around" aria-hidden="true"><span class="octicon octicon-link"></span></a>Playing around</h4>
+
+<p>Now that the VM has been created, configured, and provisioned, feel free to log onto the VM and play around.</p>
+
+<pre><code>vagrant ssh
+</code></pre>
+
+<p>Vagrant requires from default settings in order for it to interact with the VM. Here are a few requirements:</p>
+
+<ul>
+<li>vagrant/vagrant username/password</li>
+<li>vagrant user is configured for password-less sudo</li>
+</ul>
+
+<p>A full list of the requirements can be found <a href="http://docs.vagrantup.com/v2/boxes/base.html">here</a></p>
+
+<p>Once you are done playing inside the VM, you can exit</p>
+
+<pre><code>exit
+</code></pre>
+
+<p>You can also control the VM from the command line:</p>
+
+<p><strong>Startup</strong></p>
+
+<pre><code>vagrant up
+</code></pre>
+
+<p><strong>Suspend</strong></p>
+
+<pre><code>vagrant suspend
+</code></pre>
+
+<p><strong>Shutdown</strong></p>
+
+<pre><code>vagrant halt
+</code></pre>
+
+<p><strong>Destroy</strong></p>
+
+<pre><code>vagrant destroy
+</code></pre>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/4BitBen/vagrant-examples">Vagrant Examples</a> is maintained by <a href="https://github.com/4BitBen">4BitBen</a>.</span>
