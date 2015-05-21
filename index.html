@@ -353,7 +353,7 @@ vagrant halt
 <hr>
 
 <h3>
-<a id="example-4-synced-folders" class="anchor" href="#example-4-synced-folders" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 4: Synced Folders</h3>
+<a id="example-3-synced-folders" class="anchor" href="#example-3-synced-folders" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 3: Synced Folders</h3>
 
 <p>Vagrant can sync folders from the Host OS into the VM. By default, Vagrant syncs the current working directory into the /vagrant folder on the VM.</p>
 
@@ -415,7 +415,7 @@ vagrant halt
 <hr>
 
 <h3>
-<a id="example-5-provisioning" class="anchor" href="#example-5-provisioning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 5: Provisioning</h3>
+<a id="example-4-provisioning" class="anchor" href="#example-4-provisioning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 4: Provisioning</h3>
 
 <p>Vagrant can use multiple provisioning tools to configure the VM - install software, create users, etc. A few provisioners it supports are the following:</p>
 
@@ -462,17 +462,16 @@ sudo cp /vagrant/repo/nginx.repo /etc/yum.repos.d/
 <p>Here, three provisioners are defined:</p>
 
 <ol>
-<li>A shell script provisioner that installs puppet (since this Vagrant box does not come pre-packaged with puppet) as well as configures yum to look at the nginx repo.</li>
-</ol>
+<li>
+<p>A shell script provisioner that installs puppet (since this Vagrant box does not come pre-packaged with puppet) as well as configures yum to look at the nginx repo.</p>
 
 <pre><code>==&gt; default: Running provisioner: shell...
     default: Running: inline script
 ....
 </code></pre>
-
-<ol>
-<li>A puppet provisioner that runs default.pp (the contents of default.pp installs nginx and makes sure it is running as a linux service).</li>
-</ol>
+</li>
+<li>
+<p>A puppet provisioner that runs default.pp (the contents of default.pp installs nginx and makes sure it is running as a linux service).</p>
 
 <pre><code>==&gt; default: Running provisioner: puppet...
 ==&gt; default: Running Puppet with default.pp...
@@ -481,15 +480,16 @@ sudo cp /vagrant/repo/nginx.repo /etc/yum.repos.d/
 ==&gt; default: Notice: /Stage[main]/Main/Service[nginx]/ensure: ensure changed 'stopped' to 'running'
 ==&gt; default: Notice: Finished catalog run in 19.35 seconds
 </code></pre>
-
-<ol>
-<li>A shell script provisioner that echos that everything is complete.</li>
-</ol>
+</li>
+<li>
+<p>A shell script provisioner that echos that everything is complete.</p>
 
 <pre><code>==&gt; default: Running provisioner: shell...
     default: Running: inline script
 ==&gt; default: Complete! Bring your browser up and go to 192.168.50.4
 </code></pre>
+</li>
+</ol>
 
 <h4>
 <a id="playing-around-3" class="anchor" href="#playing-around-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Playing around</h4>
@@ -516,7 +516,7 @@ vagrant halt
 <hr>
 
 <h3>
-<a id="example-6-multi-machine" class="anchor" href="#example-6-multi-machine" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 6: Multi-Machine</h3>
+<a id="example-5-multi-machine" class="anchor" href="#example-5-multi-machine" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 5: Multi-Machine</h3>
 
 <p>Vagrant can manage multiple VMs from a single Vagrantfile. Configuration that is common to all VMs are provided at the top level, while configuration that is common to a particular VM is within that machine's configuration.</p>
 
@@ -539,7 +539,7 @@ vagrant halt
   end
 </code></pre>
 
-<p>And a server</p>
+<p>A server</p>
 
 <pre><code>  config.vm.define "server" do |server|
     server.vm.network "private_network", ip: "192.168.50.51"
@@ -565,18 +565,26 @@ vagrant halt
   end
 </code></pre>
 
-<p>And another shell script</p>
+<p>Another shell script</p>
 
 <pre><code>  config.vm.provision "shell"  do |shell|
     shell.inline = "echo Outer Script 2"
   end
 </code></pre>
 
-<p>Vagrant create a configuration per machine and uses the overall configuration (common and machine-specific) to create each machine's configuration. Configuration is created outside-in. This means that machine-specific configuration can either override common configuration or add onto the common configuration.  A great example is the provisioners. Each machine has their own provisioner as well as the two common provisioners. Since configuration is created outside-in, the client machine is executed as 'Outer Script 1', 'Outer Script 2', and 'Client Script'.</p>
+<p>A few things to note:</p>
+
+<ul>
+<li>Vagrant creates a configuration per machine and uses the overall configuration (common and machine-specific) to create each machine's configuration. </li>
+<li>Configuration is created outside-in. This means that machine-specific configuration can either override common configuration or add onto the common configuration.<br>
+</li>
+</ul>
+
+<p>A great example is the provisioners. Each machine has their own provisioner as well as the two common provisioners. Since configuration is created outside-in, the client machine is executed as 'Outer Script 1', 'Outer Script 2', and 'Client Script'.</p>
 
 <p>Let's create a multiple Virtual Machines:</p>
 
-<pre><code>cd 4_provision
+<pre><code>cd 5_multimachine
 vagrant up
 </code></pre>
 
@@ -611,6 +619,100 @@ vagrant halt
 <li>
 <a href="http://docs.vagrantup.com/v2/multi-machine/">Vagrant's multi-machine support</a>.</li>
 </ul>
+
+<hr>
+
+<h3>
+<a id="a-slight-detour" class="anchor" href="#a-slight-detour" aria-hidden="true"><span class="octicon octicon-link"></span></a>A slight detour</h3>
+
+<p>Before we get into the last example, that ties all the individual pieces together, let's look at a few things with vagrant.</p>
+
+<h4>
+<a id="vagrant-boxes" class="anchor" href="#vagrant-boxes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vagrant Boxes</h4>
+
+<p>As a reminder, a box is a base image that one can easily clone VMs from. You can view and manage vagrant boxes through the <code>vagrant box</code> command. e.g. listing downloaded boxes:</p>
+
+<pre><code>vagrant box list
+</code></pre>
+
+<p>And the output should be</p>
+
+<pre><code>boxcutter/centos71     (virtualbox, 1.0.15)
+</code></pre>
+
+<h4>
+<a id="vagrant-vms" class="anchor" href="#vagrant-vms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vagrant VMs</h4>
+
+<p>You can view and manage all vagrant VMs regardless of where you are through the <code>vagrant global-status</code> command.</p>
+
+<pre><code>vagrant global-status
+</code></pre>
+
+<p>And the output should be </p>
+
+<pre><code>id       name    provider   state    directory
+-----------------------------------------------------------------------------------------------------
+ee06f3d  default virtualbox poweroff C:/temp/4BitBen-vagrant-examples-533ed11/1_simple
+ae18a0a  default virtualbox poweroff C:/temp/4BitBen-vagrant-examples-533ed11/2_networking
+c61ef53  default virtualbox poweroff C:/temp/4BitBen-vagrant-examples-533ed11/3_syncedfolders
+daff296  default virtualbox poweroff C:/temp/4BitBen-vagrant-examples-533ed11/4_provision
+af981ed  client  virtualbox poweroff C:/temp/4BitBen-vagrant-examples-533ed11/5_multimachine
+17a8373  server  virtualbox poweroff C:/temp/4BitBen-vagrant-examples-533ed11/5_multimachine
+</code></pre>
+
+<h4>
+<a id="further-reading-1" class="anchor" href="#further-reading-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Further Reading</h4>
+
+<ul>
+<li>
+<a href="http://docs.vagrantup.com/v2/cli/index.html">Vagrant CLI</a> - Vagrant Command Line Interface</li>
+</ul>
+
+<hr>
+
+<h3>
+<a id="example-6-bringing-it-all-together" class="anchor" href="#example-6-bringing-it-all-together" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 6: Bringing it all together</h3>
+
+<p>In this final example, We will create 5 VMs:</p>
+
+<ul>
+<li>A client</li>
+<li>A load balancer (via nginx)</li>
+<li>Three servers</li>
+</ul>
+
+<p>The client will run <code>curl</code> commands against the load balancer. The load balancer will balance between the three backend servers.</p>
+
+<p>Let's create a multiple Virtual Machines:</p>
+
+<pre><code>cd 6_example
+vagrant up
+</code></pre>
+
+<p>This will create the 5 VMs. The load balancer and three servers will startup automatically. Log onto the client and begin running the script:</p>
+
+<pre><code>vagrant ssh client
+/vagrant/client/ping.sh
+</code></pre>
+
+<p>You will start to see responses from the different servers:</p>
+
+<pre><code>pong 192.168.50.61
+pong 192.168.50.62
+pong 192.168.50.63
+pong 192.168.50.61
+pong 192.168.50.62
+pong 192.168.50.63
+</code></pre>
+
+<p>In a separate window, go into the same directory and begin to take machines up and down and see how the load balancer reacts to servers going up and down.</p>
+
+<hr>
+
+<h3>
+<a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h3>
+
+<p>Congratulations! Hopefully, you begin to understand the power of Vagrant and find it useful.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/4BitBen/vagrant-examples">Vagrant Examples</a> is maintained by <a href="https://github.com/4BitBen">4BitBen</a>.</span>
