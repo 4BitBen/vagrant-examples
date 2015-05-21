@@ -515,6 +515,103 @@ vagrant halt
 
 <hr>
 
+<h3>
+<a id="example-6-multi-machine" class="anchor" href="#example-6-multi-machine" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 6: Multi-Machine</h3>
+
+<p>Vagrant can manage multiple VMs from a single Vagrantfile. Configuration that is common to all VMs are provided at the top level, while configuration that is common to a particular VM is within that machine's configuration.</p>
+
+<p>Let's break down the Vagrantfile configuation.</p>
+
+<h4>
+<a id="machines" class="anchor" href="#machines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machines</h4>
+
+<p>There are two machines that are defined here:</p>
+
+<p>A client</p>
+
+<pre><code>  config.vm.define "client" do |client|
+    client.vm.network "private_network", ip: "192.168.50.50"
+    client.vm.hostname = "clienthost"
+
+    client.vm.provision "shell"  do |shell|
+        shell.inline = "echo Client Script"
+    end
+  end
+</code></pre>
+
+<p>And a server</p>
+
+<pre><code>  config.vm.define "server" do |server|
+    server.vm.network "private_network", ip: "192.168.50.51"
+    server.vm.hostname = "serverhost"
+
+    server.vm.provision "shell"  do |shell|
+      shell.inline = "echo Server Script"
+    end
+  end
+</code></pre>
+
+<p>In addition to the two machines, some things are defined outside of the machines, which are common and applied to all machines. These common configurations are the following:</p>
+
+<p>The Vagrant box to use:</p>
+
+<pre><code>  config.vm.box = "boxcutter/centos71"
+</code></pre>
+
+<p>A shell script</p>
+
+<pre><code>  config.vm.provision "shell"  do |shell|
+    shell.inline = "echo Outer Script 1"
+  end
+</code></pre>
+
+<p>And another shell script</p>
+
+<pre><code>  config.vm.provision "shell"  do |shell|
+    shell.inline = "echo Outer Script 2"
+  end
+</code></pre>
+
+<p>Vagrant create a configuration per machine and uses the overall configuration (common and machine-specific) to create each machine's configuration. Configuration is created outside-in. This means that machine-specific configuration can either override common configuration or add onto the common configuration.  A great example is the provisioners. Each machine has their own provisioner as well as the two common provisioners. Since configuration is created outside-in, the client machine is executed as 'Outer Script 1', 'Outer Script 2', and 'Client Script'.</p>
+
+<p>Let's create a multiple Virtual Machines:</p>
+
+<pre><code>cd 4_provision
+vagrant up
+</code></pre>
+
+<p>With multiple machines, you can still use the same Vagrant commands. When run, they will apply to all VMs:</p>
+
+<pre><code>vagrant status
+</code></pre>
+
+<p>You can also specify a VM by its Vagrant name:</p>
+
+<pre><code>vagrant status server
+</code></pre>
+
+<h4>
+<a id="playing-around-4" class="anchor" href="#playing-around-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Playing around</h4>
+
+<p>Now that the VM has been created, configured, and provisioned, feel free to log onto the VM and play around.</p>
+
+<pre><code>vagrant ssh client
+</code></pre>
+
+<p>Once you are done playing inside the VM, you can exit and shutdown the VM.</p>
+
+<pre><code>exit
+vagrant halt
+</code></pre>
+
+<h4>
+<a id="futher-reading-3" class="anchor" href="#futher-reading-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Futher Reading</h4>
+
+<ul>
+<li>
+<a href="http://docs.vagrantup.com/v2/multi-machine/">Vagrant's multi-machine support</a>.</li>
+</ul>
+
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/4BitBen/vagrant-examples">Vagrant Examples</a> is maintained by <a href="https://github.com/4BitBen">4BitBen</a>.</span>
 
