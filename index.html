@@ -99,6 +99,8 @@ Enter your choice:
 
 <p>Click on the Download link above to get some vagrant examples, and extract the contents into a folder. All examples below assume you are in the folder that has the LICENSE file.</p>
 
+<hr>
+
 <h3>
 <a id="example-1-simple-vm" class="anchor" href="#example-1-simple-vm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 1: Simple VM</h3>
 
@@ -229,9 +231,10 @@ end
 
 <p>A full list of the requirements can be found <a href="http://docs.vagrantup.com/v2/boxes/base.html">here</a></p>
 
-<p>Once you are done playing inside the VM, you can exit</p>
+<p>Once you are done playing inside the VM, you can exit and shutdown the VM.</p>
 
 <pre><code>exit
+vagrant halt
 </code></pre>
 
 <p>You can also control the VM from the command line:</p>
@@ -255,6 +258,80 @@ end
 
 <pre><code>vagrant destroy
 </code></pre>
+
+<h4>
+<a id="providers" class="anchor" href="#providers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Providers</h4>
+
+<p>You can specify memory and cpu settings for each provider.</p>
+
+<pre><code>  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = 2
+    vb.memory = 512
+  end
+
+  config.vm.provider "parallels" do |pl|
+    pl.cpus = 2
+    pl.memory = 512
+  end
+</code></pre>
+
+<hr>
+
+<h3>
+<a id="example-2-network" class="anchor" href="#example-2-network" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 2: Network</h3>
+
+<p>Without specifying a network in the Vagrantfile, the default may vary by provider.</p>
+
+<p>Let's create a Virtual Machine.</p>
+
+<pre><code>cd 2_networking
+vagrant up
+</code></pre>
+
+<p>The Vagrantfile here differs from the VagrantFile in Example 1 by two lines:</p>
+
+<pre><code>config.vm.network "private_network", ip: "192.168.50.2"
+config.vm.host_name = "my-host"
+</code></pre>
+
+<p>These two lines do a few things. First, Vagrant interacts with the VM Provider to create an additional network adapter:</p>
+
+<pre><code>==&gt; default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: hostonly
+</code></pre>
+
+<p>This can be confirmed by looking at the network settings for the VM.</p>
+
+<p>Secondly, Vagrant interacts with the VM, to set the IP address and the hostname:</p>
+
+<pre><code>==&gt; default: Setting hostname...
+==&gt; default: Configuring and enabling network interfaces...
+</code></pre>
+
+<h4>
+<a id="playing-around-1" class="anchor" href="#playing-around-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Playing around</h4>
+
+<p>Now that the VM has been created, configured, and provisioned, feel free to log onto the VM and play around.</p>
+
+<pre><code>vagrant ssh
+</code></pre>
+
+<p>Try looking at a few things, like the hostname or IP.</p>
+
+<pre><code># Hostname
+hostname
+# IPs
+ip addr show
+</code></pre>
+
+<p>Once you are done playing inside the VM, you can exit and shutdown the VM.</p>
+
+<pre><code>exit
+vagrant halt
+</code></pre>
+
+<hr>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/4BitBen/vagrant-examples">Vagrant Examples</a> is maintained by <a href="https://github.com/4BitBen">4BitBen</a>.</span>
