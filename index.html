@@ -260,7 +260,7 @@ vagrant halt
 </code></pre>
 
 <h4>
-<a id="providers" class="anchor" href="#providers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Providers</h4>
+<a id="further-reading" class="anchor" href="#further-reading" aria-hidden="true"><span class="octicon octicon-link"></span></a>Further Reading</h4>
 
 <p>You can specify memory and cpu settings for each provider.</p>
 
@@ -280,9 +280,9 @@ vagrant halt
 <h3>
 <a id="example-2-network" class="anchor" href="#example-2-network" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 2: Network</h3>
 
-<p>Without specifying a network in the Vagrantfile, the default may vary by provider.</p>
+<p>Without specifying a network in the Vagrantfile, the default may vary by provider. Vagrant allows the ability to configure a private network, a public (aka bridged) network, or do port forwarding.</p>
 
-<p>Let's create a Virtual Machine.</p>
+<p>Let's create a Virtual Machine with a private network.</p>
 
 <pre><code>cd 2_networking
 vagrant up
@@ -303,7 +303,7 @@ config.vm.host_name = "my-host"
 
 <p>This can be confirmed by looking at the network settings for the VM.</p>
 
-<p>Secondly, Vagrant interacts with the VM, to set the IP address and the hostname:</p>
+<p>Second, Vagrant interacts with the VM, to set the IP address and the hostname:</p>
 
 <pre><code>==&gt; default: Setting hostname...
 ==&gt; default: Configuring and enabling network interfaces...
@@ -330,6 +330,76 @@ ip addr show
 <pre><code>exit
 vagrant halt
 </code></pre>
+
+<h4>
+<a id="futher-reading" class="anchor" href="#futher-reading" aria-hidden="true"><span class="octicon octicon-link"></span></a>Futher Reading</h4>
+
+<ul>
+<li>
+<a href="http://docs.vagrantup.com/v2/networking/index.html">Vagrant's network support</a>.</li>
+</ul>
+
+<hr>
+
+<h3>
+<a id="example-4-synced-folders" class="anchor" href="#example-4-synced-folders" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 4: Synced Folders</h3>
+
+<p>Vagrant can sync folders from the Host OS into the VM. By default, Vagrant syncs the current working directory into the /vagrant folder on the VM.</p>
+
+<p>Vagrant support other synchronization options - NFS, RSync, and SMB (windows host only) </p>
+
+<p>NOTE: These other options typically require 3rd party software installed or are OS specific.</p>
+
+<p>Let's create a Virtual Machine with a private network.</p>
+
+<pre><code>cd 2_syncedfolders
+vagrant up
+</code></pre>
+
+<p>The Vagrantfile here differs from the VagrantFile in Example 1 by one line:</p>
+
+<pre><code>config.vm.synced_folder "..", "/vagrant-examples-default"
+</code></pre>
+
+<p>An additional entry is seen in the Vagrant output:</p>
+
+<pre><code>==&gt; default: Mounting shared folders...
+    default: /vagrant =&gt; C:/temp/4BitBen-vagrant-examples-533ed11/3_syncedfolders
+    default: /vagrant-examples-default =&gt; C:/temp/4BitBen-vagrant-examples-533ed11
+</code></pre>
+
+<h4>
+<a id="playing-around-2" class="anchor" href="#playing-around-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Playing around</h4>
+
+<p>Now that the VM has been created, configured, and provisioned, feel free to log onto the VM and play around.</p>
+
+<pre><code>vagrant ssh
+</code></pre>
+
+<p>Look at the contents of the /vagrant and /vagrant-examples-default.</p>
+
+<pre><code>ls /vagrant
+ls /vagrant-examples-default
+touch /vagrant/foo.bar
+ls /vagrant
+ls /vagrant-examples-default
+</code></pre>
+
+<p>Once you are done playing inside the VM, you can exit and shutdown the VM.</p>
+
+<pre><code>exit
+vagrant halt
+</code></pre>
+
+<h4>
+<a id="futher-reading-1" class="anchor" href="#futher-reading-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Futher Reading</h4>
+
+<ul>
+<li>
+<a href="http://docs.vagrantup.com/v2/synced-folders/">Vagrant's synced folder support</a>.</li>
+<li>
+<a href="http://mitchellh.com/comparing-filesystem-performance-in-virtual-machines">Comparing Filesystem Performance in VMs</a> - Further look at sync folders</li>
+</ul>
 
 <hr>
 
