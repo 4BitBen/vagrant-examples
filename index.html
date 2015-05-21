@@ -463,9 +463,33 @@ sudo cp /vagrant/repo/nginx.repo /etc/yum.repos.d/
 
 <ol>
 <li>A shell script provisioner that installs puppet (since this Vagrant box does not come pre-packaged with puppet) as well as configures yum to look at the nginx repo.</li>
+</ol>
+
+<pre><code>==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+....
+</code></pre>
+
+<ol>
 <li>A puppet provisioner that runs default.pp (the contents of default.pp installs nginx and makes sure it is running as a linux service).</li>
+</ol>
+
+<pre><code>==&gt; default: Running provisioner: puppet...
+==&gt; default: Running Puppet with default.pp...
+==&gt; default: Notice: Compiled catalog for localhost in environment production in 0.61 seconds
+==&gt; default: Notice: /Stage[main]/Main/Package[nginx]/ensure: created
+==&gt; default: Notice: /Stage[main]/Main/Service[nginx]/ensure: ensure changed 'stopped' to 'running'
+==&gt; default: Notice: Finished catalog run in 19.35 seconds
+</code></pre>
+
+<ol>
 <li>A shell script provisioner that echos that everything is complete.</li>
 </ol>
+
+<pre><code>==&gt; default: Running provisioner: shell...
+    default: Running: inline script
+==&gt; default: Complete! Bring your browser up and go to 192.168.50.4
+</code></pre>
 
 <h4>
 <a id="playing-around-3" class="anchor" href="#playing-around-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Playing around</h4>
