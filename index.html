@@ -27,7 +27,14 @@
 <h2>
 <a id="what-is-vagrant" class="anchor" href="#what-is-vagrant" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is Vagrant</h2>
 
-<p>Vagrant is a tool that interacts with a VM provider, like <a href="https://www.virtualbox.org/">VirtualBox</a> or <a href="http://www.parallels.com/">Parallels</a> to create and configure VMs, like configuring network adapters to use <a href="http://en.wikipedia.org/wiki/Network_address_translation">NAT</a> or <a href="http://en.wikipedia.org/wiki/Bridging_(networking)">Bridged</a>. It then interacts with the newly created VM to provision the VM, like setting the hostname and IP address as well as installing software on the VM. Vagrant does this in an automated way and is meant to be version controlled along side source code.</p>
+<p>Vagrant is a tool that automates the creation of VMs. It does this in two ways:</p>
+
+<ol>
+<li><p>Vagrant interacts with a VM provider, like <a href="https://www.virtualbox.org/">VirtualBox</a> or <a href="http://www.parallels.com/">Parallels</a> to create and configure VMs, like configuring network adapters to use <a href="http://en.wikipedia.org/wiki/Network_address_translation">NAT</a> or <a href="http://en.wikipedia.org/wiki/Bridging_(networking)">Bridged</a>. </p></li>
+<li><p>Vagrant interacts with the newly created VM to provision the VM, like setting the hostname and IP address as well as installing software on the VM. </p></li>
+</ol>
+
+<p>Vagrant, through its Vagrantfile, is able to describe how to create the VM and is meant to be version controlled along side source code.</p>
 
 <h2>
 <a id="what-vagrant-is-not" class="anchor" href="#what-vagrant-is-not" aria-hidden="true"><span class="octicon octicon-link"></span></a>What Vagrant is not</h2>
